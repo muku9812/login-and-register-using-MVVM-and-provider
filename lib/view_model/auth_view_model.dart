@@ -10,7 +10,15 @@ class AuthViewMode with ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
 
+  bool _signUpLoading = false;
+  bool get signUpLoading => _signUpLoading;
+
   setLoading(bool value) {
+    _signUpLoading = value;
+    notifyListeners();
+  }
+
+  setSignUpsLoading(bool value) {
     _loading = value;
     notifyListeners();
   }
@@ -26,6 +34,24 @@ class AuthViewMode with ChangeNotifier {
       }
     }).onError((error, stackTrace) {
       setLoading(false);
+      if (kDebugMode) {
+        Utils.toastMessage(error.toString());
+        print(error.toString());
+      }
+    });
+  }
+
+  Future<void> signUpApi(dynamic data, BuildContext context) async {
+    setSignUpsLoading(true);
+    _myRepo.signUpApi(data).then((value) {
+      setSignUpsLoading(false);
+      Utils.toastMessage('Registration Successful.');
+      Navigator.pushNamed(context, RoutesName.home);
+      if (kDebugMode) {
+        print(value.toString());
+      }
+    }).onError((error, stackTrace) {
+      setSignUpsLoading(false);
       if (kDebugMode) {
         Utils.toastMessage(error.toString());
         print(error.toString());
