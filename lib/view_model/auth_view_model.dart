@@ -1,8 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm/model/user_model.dart';
 import 'package:mvvm/repository/auth_repository.dart';
 import 'package:mvvm/utilities/routes/routes_name.dart';
 import 'package:mvvm/utilities/utilities.dart';
+import 'package:mvvm/view_model/user_view_model.dart';
+import 'package:provider/provider.dart';
 
 class AuthViewMode with ChangeNotifier {
   final _myRepo = AuthRepository();
@@ -27,8 +30,12 @@ class AuthViewMode with ChangeNotifier {
     setLoading(true);
     _myRepo.loginApi(data).then((value) {
       setLoading(false);
+      final userPreference = Provider.of<UserViewModel>(context, listen: false);
+      userPreference.saveUser(UserModel(
+          token: value['token'].toString(),
+          message: value['message'].toString()));
       Utils.snackBar('Login Successful.', context);
-      Navigator.pushNamed(context, RoutesName.home);
+      Navigator.pushReplacementNamed(context, RoutesName.home);
       if (kDebugMode) {
         print(value.toString());
       }
@@ -46,7 +53,7 @@ class AuthViewMode with ChangeNotifier {
     _myRepo.signUpApi(data).then((value) {
       setSignUpsLoading(false);
       Utils.toastMessage('Registration Successful.');
-      Navigator.pushNamed(context, RoutesName.home);
+      Navigator.pushReplacementNamed(context, RoutesName.home);
       if (kDebugMode) {
         print(value.toString());
       }

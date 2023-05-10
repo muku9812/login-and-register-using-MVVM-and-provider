@@ -10,11 +10,13 @@ class SplashServices {
   void chechAuthentication(BuildContext context) {
     getUserData().then((value) async {
       if (value.token == 'null' || value.token == '') {
-        await Future.delayed(Duration(seconds: 3));
+        await Future.delayed(const Duration(seconds: 3));
 
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context, RoutesName.login);
       } else {
-        await Future.delayed(Duration(seconds: 3));
+        await Future.delayed(const Duration(seconds: 3));
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context, RoutesName.home);
       }
     }).onError((error, stackTrace) {

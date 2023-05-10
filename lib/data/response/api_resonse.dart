@@ -11,12 +11,12 @@ class ApiResponse<T> {
       : status = Status.LOADING,
         data = null,
         message = "";
-  ApiResponse.completed(T data)
+  ApiResponse.completed(data)
       : status = Status.COMPLETED,
         // ignore: prefer_initializing_formals
         data = data,
         message = "";
-  ApiResponse.error(String message)
+  ApiResponse.error(message)
       : status = Status.ERROR,
         data = null,
         // ignore: prefer_initializing_formals

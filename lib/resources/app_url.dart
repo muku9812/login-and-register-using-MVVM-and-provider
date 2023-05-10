@@ -3,4 +3,5 @@ class AppUrl {
 
   static var loginUrl = '${baseUrl}api/login';
   static var registerApiEndPoint = '${baseUrl}api/register';
+  static var users = '${baseUrl}api/getUser';
 }

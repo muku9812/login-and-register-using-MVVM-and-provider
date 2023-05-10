@@ -4,6 +4,7 @@ import 'package:mvvm/resources/components/round_buttons.dart';
 import 'package:mvvm/utilities/routes/routes_name.dart';
 import 'package:mvvm/utilities/utilities.dart';
 import 'package:mvvm/view_model/auth_view_model.dart';
+import 'package:mvvm/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -128,6 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'password': _passwordController.text.toString(),
                       };
                       authViewModel.loginApi(data, context);
+
                       if (kDebugMode) {
                         print('success');
                       }

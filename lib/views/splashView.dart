@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:mvvm/views/services/splashServices.dart';
+import 'package:mvvm/view_model/services/splashServices.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
